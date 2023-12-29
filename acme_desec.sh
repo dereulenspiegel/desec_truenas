@@ -28,7 +28,7 @@ del_record() {
 }
 
 if (( $# != 4 )); then
-    echo "Wrong numbers of paremeters"
+    echo "Wrong numbers of parameters"
     exit 1
 fi
 
