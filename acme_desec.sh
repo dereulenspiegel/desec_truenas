@@ -2,6 +2,7 @@
 # truenas-ACME-desec-authenticator
 
 DESEC_TOKEN="${DESEC_TOKEN}"
+OVERRIDE_DOMAIN=""
 
 add_record() {
     _DOMAIN="${1}"
@@ -36,6 +37,12 @@ COMMAND="$1"
 DOMAIN="$2"
 SUBDOMAIN="$3"
 TXT_VAL="$4"
+
+if [ ! -z "$OVERRIDE_DOMAIN" ]; then
+    echo "Override Domain (${OVERRIDE_DOMAIN}) set, using this instead of ${DOMAIN}"
+    DOMAIN="${OVERRIDE_DOMAIN}"
+    SUBDOMAIN=${SUBDOMAIN%%".$DOMAIN"}
+fi
 
 if [ "$COMMAND" == "set" ]; then
     add_record "${DOMAIN}" "${SUBDOMAIN}" "${TXT_VAL}"
